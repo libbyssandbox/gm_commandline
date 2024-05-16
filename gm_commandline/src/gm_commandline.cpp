@@ -11,18 +11,22 @@ LUA_FUNCTION(HasParm)
 	return 1;
 }
 
-LUA_FUNCTION(GetParm)
+LUA_FUNCTION(GetParmString)
 {
 	const char* psz = LUA->CheckString(1);
+	const char* szDefault = LUA->CheckString(2);
 
-	if (!CommandLine()->HasParm(psz))
-	{
-		LUA->PushNil();
-		return 1;
-	}
+	LUA->PushString(CommandLine()->ParmValue(psz, szDefault));
 
-	int index = CommandLine()->FindParm(psz);
-	LUA->PushString(CommandLine()->GetParm(index));
+	return 1;
+}
+
+LUA_FUNCTION(GetParmNumber)
+{
+	const char* psz = LUA->CheckString(1);
+	float flDefault = LUA->CheckNumber(2);
+
+	LUA->PushNumber(CommandLine()->ParmValue(psz, flDefault));
 
 	return 1;
 }
@@ -38,8 +42,12 @@ GMOD_MODULE_OPEN()
 			LUA->PushCFunction(HasParm);
 			LUA->RawSet(-3);
 
-			LUA->PushString("GetParm");
-			LUA->PushCFunction(GetParm);
+			LUA->PushString("GetParmString");
+			LUA->PushCFunction(GetParmString);
+			LUA->RawSet(-3);
+
+			LUA->PushString("GetParmNumber");
+			LUA->PushCFunction(GetParmNumber);
 			LUA->RawSet(-3);
 		}
 		LUA->RawSet(-3);
