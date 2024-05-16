@@ -6,7 +6,7 @@ LUA_FUNCTION(HasParm)
 {
 	const char* psz = LUA->CheckString(1);
 
-	LUA->PushBool(CommandLine()->CheckParm(psz));
+	LUA->PushBool(CommandLine()->HasParm(psz));
 
 	return 1;
 }
