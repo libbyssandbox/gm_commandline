@@ -13,7 +13,7 @@
 
   Returns the string value of the parm if present, provided default otherwise.
   ```lua
-  local strName = commandline.HasParm("-somename", "unknown")
+  local strName = commandline.GetParmString("-somename", "unknown")
   ```
 </details>
 
@@ -22,7 +22,7 @@
 
   Returns the number value of the parm if present, provided default otherwise.
   ```lua
-  local iWidth = commandline.HasParm("-width", 1920)
-  local flDensity = commandline.HasParm("-density", 4.5)
+  local iWidth = commandline.GetParmNumber("-width", 1920)
+  local flDensity = commandline.GetParmNumber("-density", 4.5)
   ```
 </details>
